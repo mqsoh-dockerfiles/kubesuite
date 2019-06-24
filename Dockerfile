@@ -15,3 +15,10 @@ RUN apk add --no-cache curl && \
     chmod +x ./kubectl && \
     cp ./kubectl /usr/local/bin && \
     apk del curl
+
+RUN apk add --no-cache curl && \
+    curl -L https://github.com/heptio/velero/releases/download/v1.0.0/velero-v1.0.0-linux-amd64.tar.gz -o velero.tar.gz && \
+    mkdir velero && tar --extract --gzip --directory velero --strip-components 1 --file ./velero.tar.gz && \
+    mv velero/velero /usr/local/bin && \
+    rm -rf velero && \
+    apk del curl
