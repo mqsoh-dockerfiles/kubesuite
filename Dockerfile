@@ -15,20 +15,3 @@ RUN apk add --no-cache curl && \
     chmod +x ./kubectl && \
     cp ./kubectl /usr/local/bin && \
     apk del curl
-
-# https://github.com/wercker/stern
-RUN apk add --no-cache curl && \
-    curl -LO https://github.com/wercker/stern/releases/download/1.8.0/stern_linux_amd64 && \
-    mv ./stern_linux_amd64 /bin/stern && \
-    chmod +x /bin/stern && \
-    apk del curl
-
-# https://github.com/kubernetes/helm
-RUN apk add --no-cache curl && \
-    cd /tmp && \
-    curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz && \
-    tar -xvzf helm-v2.9.1-linux-amd64.tar.gz && \
-    mv ./linux-amd64/helm /bin && \
-    chmod +x /bin/helm && \
-    rm -rf /tmp/* && \
-    apk del curl
