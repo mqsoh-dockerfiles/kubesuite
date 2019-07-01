@@ -22,3 +22,14 @@ RUN apk add --no-cache curl && \
     mv velero/velero /usr/local/bin && \
     rm -rf velero && \
     apk del curl
+
+RUN apk add curl && \
+    opsys=linux && \
+    curl -s https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest |\
+    grep browser_download |\
+    grep $opsys |\
+    cut -d '"' -f 4 |\
+    xargs curl -O -L &&\
+    mv kustomize_*_${opsys}_amd64 /bin/kustomize && \
+    chmod u+x /bin/kustomize && \
+    apk del curl
